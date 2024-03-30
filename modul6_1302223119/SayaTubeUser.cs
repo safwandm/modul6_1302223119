@@ -18,6 +18,26 @@ namespace modul6_1302223119
             Username = username;
 
             uploadedVideos = new List<SayaTubeVideo>();
+
+            try
+            {
+                if (username.Length > 100)
+                {
+                    throw new ArgumentException("Error: Username argument must not be longer than 200 character");
+                }
+                else if (username.Length == 0 || username == null)
+                {
+                    throw new ArgumentNullException("Username argument must not be null nor an empty string");
+                }
+            } catch (ArgumentNullException e) 
+            {
+                Console.WriteLine(e.Message);
+            } catch (ArgumentException e) 
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
         }
 
         public int GetTotalVideoPlayCount()
@@ -41,6 +61,10 @@ namespace modul6_1302223119
             foreach (var video in uploadedVideos)
             {
                 Console.WriteLine($"Video {++i} judul: {video.getJudul()}");
+                if (i == 8)
+                {
+                    break;
+                }
             }
         }
     }
